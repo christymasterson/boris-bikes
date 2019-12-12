@@ -16,7 +16,18 @@ describe DockingStation do
     it 'raises an error where there are no bikes available' do
       expect { subject.release_bike }.to raise_error 'No bikes available'
     end
+end 
+    describe '#release_bike' do
+
+    it 'raises an error when we try to release a broken bike' do
+      docking_station = DockingStation.new(1)
+      bike = Bike.new
+      broken_bike = bike.report_broken
+      docking_station.dock(broken_bike)
+      expect { docking_station.release_bike }.to raise_error 'This bike is broken'
+    end
   end
+
 
 
   it { is_expected.to respond_to(:dock).with(1).argument }
